@@ -16,17 +16,25 @@ class ProductsController {
   }
 
   // [GET] /products/:id
- async getProductDetail(req, res) {
-    try {
-      const product = await Product.findOne({ slug: req.params.slug });
-      // res.json(product);
-      res.render('products/detail', {
-        product: mongooseToObject(product),
-      });
-    } catch (error) {
-      res.status(400).json({ error: 'ERROR!!!' });
-    }
+  async getProductsDetail(req,res){
+    const product = await Product.findOne({slug:req.params.slug});
+    res.render('products/detail',{
+      product: mongooseToObject(product),
+    })
   }
+  async createProduct(req,res){
+    res.render('products/create')
+  }
+  async storeProduct(req,res){
+   try{
+    const product = new Product(req.body)
+    await product.save()
+    res.redirect('/products')
+   }catch (error) {
+    res.status(400).json({ error: 'ERROR!!!' });
+  }
+  }
+  
 }
 
 module.exports = new ProductsController();
