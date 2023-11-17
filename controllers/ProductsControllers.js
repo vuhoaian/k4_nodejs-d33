@@ -22,7 +22,7 @@ class ProductsController {
       product: mongooseToObject(product),
     })
   }
-  async createProduct(req,res){
+  async createProduct(req,res, next){
     res.render('products/create')
   }
   async storeProduct(req,res){
