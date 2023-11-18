@@ -5,6 +5,4 @@ const meControllers = require('../controllers/MeControllers');
 
 router.get('/stored/courses',meControllers.storedCourses)
 
-
-
 module.exports = router;

@@ -34,7 +34,20 @@ class ProductsController {
     res.status(400).json({ error: 'ERROR!!!' });
   }
   }
-  
+   // [GET] /products/:id/edit
+  edit(req,res, next){
+    Product.findById(req.params.id)
+       .then(course =>res.render('products/edit',{
+        course: mongooseToObject(course)
+       }))
+       .catch(next);
+  }
+  // [GET] /products/:id
+  update(req, res, next){
+      Product.updateOne({_id:req.params.id}, req.body)
+      .then(()=> res.redirect('/me/stored/courses'))
+      .catch(next);
+    }
 }
 
 module.exports = new ProductsController();

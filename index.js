@@ -1,11 +1,18 @@
 const express = require("express");
+const methodOverride = require("method-override");
 const { engine } = require("express-handlebars");
 
 const app = express();
 const port = 3000;
+app.use(express.urlencoded({
+  extended: true
+}));
+app.use(express.json());
+app.use(methodOverride('_method'));
 
-
-app.engine('handlebars', engine());
+app.engine('handlebars', engine(
+  
+));
 app.set('view engine', 'handlebars');
 
 
