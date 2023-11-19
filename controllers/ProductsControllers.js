@@ -42,11 +42,18 @@ class ProductsController {
        }))
        .catch(next);
   }
-  // [GET] /products/:id
+  // [Gut] /products/:id
   update(req, res, next){
       Product.updateOne({_id:req.params.id}, req.body)
       .then(()=> res.redirect('/me/stored/courses'))
       .catch(next);
+    }
+    
+  // [Detele] /products/:id
+  destroy(req, res, next){
+      Product.deteleOne({_id:req.params.id})
+      .then(() =>res.redirect('back'))
+      .catch(next)
     }
 }
 
