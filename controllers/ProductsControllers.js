@@ -42,7 +42,7 @@ class ProductsController {
        }))
        .catch(next);
   }
-  // [Gut] /products/:id
+  // [Put] /products/:id
   update(req, res, next){
       Product.updateOne({_id:req.params.id}, req.body)
       .then(()=> res.redirect('/me/stored/courses'))
