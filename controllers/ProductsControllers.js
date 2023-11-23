@@ -6,10 +6,10 @@ class ProductsController {
   async getAllProducts(req, res) {
     try {
       const products = await Product.find();
-       res.json(products);
-      // res.render('products/list', {
-      //   products: mutipleMongooseToObject(products),
-      // });
+       //res.json(products);
+      res.render('products/list', {
+        products: mutipleMongooseToObject(products),
+      });
     } catch (error) {
       res.status(400).json({ error: 'ERROR!!!' });
     }
@@ -18,10 +18,10 @@ class ProductsController {
   // [GET] /products/:id
   async getProductsDetail(req,res){
     const product = await Product.findById(req.params.id);
-    res.json(product);
-    // res.render('products/detail',{
-    //   product: mongooseToObject(product),
-    // })
+    //res.json(product);
+    res.render('products/detail',{
+      product: mongooseToObject(product),
+    })
   }
   async createProduct(req,res, next){
     res.render('products/create')
@@ -31,8 +31,8 @@ class ProductsController {
    try{
     const product = new Product(req.body)
     await product.save()
-    res.json({mess:"ok"});
-   // res.redirect('/products')
+   // res.json({mess:"ok"});
+   res.redirect('/products')
    }catch (error) {
     res.status(400).json({ error: 'ERROR!!!' });
   }
@@ -48,17 +48,17 @@ class ProductsController {
   // [Put] /products/:id
   update(req, res, next){
       Product.updateOne({ slug:req.params.slug}, req.body)
-      res.status(400).json({ message: 'ok!!!' });
-      // .then(()=> res.redirect('/me/stored/courses'))
-      // .catch(next);
+      //res.status(400).json({ message: 'ok!!!' });
+      .then(()=> res.redirect('/me/stored/courses'))
+      .catch(next);
     }
     
   // [Detele] /products/:id
   destroy(req, res, next){
       Product.deleteOne({_id:req.params.id})
-      res.status(400).json({ message: 'ok!!!' });
-      // .then(() =>res.redirect('back'))
-      // .catch(next)
+     // res.status(400).json({ message: 'ok!!!' });
+      .then(() =>res.redirect('back'))
+      .catch(next)
     }
 }
 
