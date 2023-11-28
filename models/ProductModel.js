@@ -15,7 +15,7 @@ const Product = new Schema({
     updatedAt: { type: Date, default: Date.now },
     
 },
-{ timestamps: true }
+{ timestamps: true, versionKey: false }
 );
 
 module.exports = mongoose.model('Product', Product);
